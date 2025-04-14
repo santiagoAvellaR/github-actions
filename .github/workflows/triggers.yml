@@ -1,0 +1,28 @@
+name: Workflow con múltiples triggers
+on:
+  push:
+    branches:
+      - '**'  # Cualquier rama
+  pull_request:
+    branches:
+      - aprendiendo-github-actions  # Rama específica para PRs
+      - main  # O la rama principal que uses
+  workflow_dispatch:  # Permite ejecutar manualmente el workflow
+  schedule:
+    - cron: '0 6 * * *'  # Todos los días a las 6:00am UTC
+
+jobs:
+  ejecutar-script:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout del repositorio
+        uses: actions/checkout@v3
+
+      - name: Configurar Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
+
+      - name: Ejecutar hola.py
+        run: python hola.py
