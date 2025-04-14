@@ -1,19 +1,16 @@
-name: Ejecutar script de Python
-
+name: Ejecutar script de Python Hola Mundo
 on: [push]  # Esto hará que se ejecute cada vez que hagas un push
-
 jobs:
   run-python-script:
     runs-on: ubuntu-latest
-
     steps:
     - name: Checkout del código
       uses: actions/checkout@v3
-
     - name: Configurar Python
       uses: actions/setup-python@v4
       with:
         python-version: '3.10'  # Puedes cambiar a la versión que prefieras
-
+    - name: Definir variable
+      run: echo "USERNAME=${{ github.actor }}" >> $GITHUB_ENV
     - name: Ejecutar script hola.py
       run: python hola.py
